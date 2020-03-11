@@ -15,7 +15,7 @@ spec:
    spec:
     containers:
      - name: c00
-       image: sharandevop/jobready:latest 
+       image: mydocker4151/democicd:latest
        ports:
         - containerPort: 8080
 
