@@ -10,7 +10,7 @@ pipeline {
   {
   agent { label 'test' }
    steps { 
-    git branch: 'master', url: 'https://gitlab.com/sharan.devop/task_cloudstack.git'
+    git branch: 'master', url: 'https://github.com/Devopsmural/CICD.git'
    }
   }
   
