@@ -18,10 +18,10 @@ pipeline {
   {
    agent { label 'dev' }
    steps { 
-        dir ("./CICD/samplejar") {
+        dir ("/home/ubuntu/jenkins/workspace/dev/CICD/samplejar") {
            sh "mvn clean package "
 		}
-		dir ("./CICD/samplewar") {
+		dir ("/home/ubuntu/jenkins/workspace/dev/CICD/samplewar") {
            sh "mvn clean package "
 		}
    }
