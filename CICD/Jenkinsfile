@@ -8,71 +8,9 @@ pipeline {
  {
   stage('Checkout')
   {
-  agent { label 'dev' }
+  agent { label 'test' }
    steps { 
     git branch: 'master', url: 'https://github.com/Devopsmural/CICD.git'
    }
   }
   
-  stage('Build Artifacts')
-  {
-   agent { label 'dev' }
-   steps { 
-        dir ("/home/ubuntu/jenkins/workspace/dev/CICD/samplejar") {
-           sh "mvn clean package "
-		}
-		dir ("/home/ubuntu/jenkins/workspace/dev/CICD/samplewar") {
-           sh "mvn clean package "
-		}
-   }
-  }
-  
-  stage('Code Coverage')
-  {
-   agent { label 'dev' }
-   steps {
-     echo "Running Code Coverage ..."  
-	 dir ("./CICD/samplejar") {
-	   sh "mvn  org.jacoco:jacoco-maven-plugin:0.5.5.201112152213:prepare-agent"
-	 }
-   }
-  }
-
-  stage('SonarQube Analysis') 
-  {
-    agent { label 'dev' }
-    steps{
-     withSonarQubeEnv('mysonarqube') {
-	  dir ("./CICD/samplejar") {
-         sh 'mvn sonar:sonar'
-	  }
-     } 
-    }
-  }
-  
-  stage('Build Image') 
-  {
-    agent { label 'dev' }
-    steps{
-      script {
-          docker.withRegistry( 'https://registry.hub.docker.com', 'dockerlogin' ) {
-             /* Build Docker Image locally */
-             myImage = docker.build("sharandevop/cloudstack")
-
-             /* Push the container to the Registry */
-             myImage.push()
-          }
-      }
-    }
-  }
-
-  stage('Smoke Test')
-  {
-    agent { label 'dev' }
-    steps {
-      sh "chmod +x runsanity.sh; ./runsanity.sh sharandevop/cloudstack"
-    }
-  }
-
- } //End of Stages
-} //End of Pipeline
