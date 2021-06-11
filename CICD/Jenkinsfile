@@ -10,21 +10,6 @@ pipeline {
   {
   agent { label 'test' }
    steps { 
-    git branch: 'master', url: 'https://github.com/Devopsmural/CICD.git'
+    git branch: 'master', url: 'https://gitlab.com'
    }
   }
-  stage('Code Coverage')
- {
- agent { label'test' }
-   when {
-    expression { return params.CODEANAYLSIS }
-  }
-  steps {
-   echo "Running Code Coverage ..."
-    dir ("./samplejar") {
-     sh'mvn org.jacaco
-      }
-    }
- }
- }
-}
