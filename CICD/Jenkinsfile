@@ -32,11 +32,29 @@ pipeline {
    agent { label 'test' }
    steps {
      echo "Running Code Coverage ..."  
-	 dir ("./CICD/samplejar") {
+	 dir ("./CICD/samplewar") {
 	   sh "mvn  org.jacoco:jacoco-maven-plugin:0.5.5.201112152213:prepare-agent"
 	 }
    }
   }
+ stage('Upload Artifactory')
+  {
+  when { environment name: 'BUILDME', value: 'yes' }
+    agent { label 'test' }
+    steps {
+      script {
+              /*define the artifactory server details */
+            def server = Artifactory.server 'artifactoryid'
+            def uploadSpec = """{
+                "files": [{
+                "pattern": "./CICD/samplewar",
+                "target": "myartifactory"
+                }]
+            }"""  
+            server.upload(uploadSpec)
+          }
+        }
+      }
 
   stage('SonarQube Analysis') 
   {
