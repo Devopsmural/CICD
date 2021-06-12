@@ -13,3 +13,16 @@ pipeline {
     git branch: 'master', url: 'https://gitlab.com/https://github.com/Devopsmural/CICD.git'
    }
   }
+  
+  stage('Build Artifacts')
+  {
+   agent { label 'test' }
+   steps { 
+        dir ("./CICD/samplejar") {
+           sh "mvn clean package "
+		}
+		dir ("./CICD/samplewar") {
+           sh "mvn clean package "
+		}
+   }
+  }
