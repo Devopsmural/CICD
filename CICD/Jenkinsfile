@@ -44,11 +44,11 @@ pipeline {
     steps {
       script {
               /*define the artifactory server details */
-            def server = Artifactory.server 'myartifactory'
+            def server = Artifactory.server 'Myartifactory'
             def uploadSpec = """{
                 "files": [{
                 "pattern": "./CICD/samplewar",
-                "target": "myartifactory"
+                "target": "Myartifactory"
                 }]
             }"""  
             server.upload(uploadSpec)
