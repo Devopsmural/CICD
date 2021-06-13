@@ -44,7 +44,7 @@ pipeline {
     steps {
       script {
               /*define the artifactory server details */
-            def server = Artifactory.server 'artifactoryid'
+            def server = Artifactory.server 'myartifactory'
             def uploadSpec = """{
                 "files": [{
                 "pattern": "./CICD/samplewar",
