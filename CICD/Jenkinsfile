@@ -21,7 +21,7 @@ pipeline {
         dir ("./CICD/slave1") {
            sh "mvn clean package "
 		}
-		dir ("./CICD/Slave1") {
+        dir ("./CICD/Slave1") {
            sh "mvn clean package "
 		}
    }
