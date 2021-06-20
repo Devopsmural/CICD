@@ -15,7 +15,7 @@ spec:
    spec:
     containers:
      - name: c00
-       image: mydocker4151/democicd:latest
+       image: krish41/newproject:latest
        ports:
         - containerPort: 8080
 
