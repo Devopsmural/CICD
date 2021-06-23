@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TESTURL="localhost:8080/samplewar"
+TESTURL="localhost:8081/samplewar"
 
 
 launch_container()
@@ -8,9 +8,9 @@ launch_container()
   echo "INFO: Begin Docker container creation"
   IMG=$1
   BUILDDIR=$(pwd)
-  mkdir sanite
+  mkdir sanity
 
-  CID=$(/usr/bin/docker run -itd --name cloud -p 8080:8080 -v ${BUILDDIR}/sanity:/opt/jboss/wildfly/standalone/log ${IMG})
+  CID=$(/usr/bin/docker run -itd --name cloud -p 8081:8081 -v ${BUILDDIR}/sanity:/opt/jboss/wildfly/standalone/log ${IMG})
 
   if [ $? -ne "0" ]; then
      echo "ERROR: Couldnt create Docker Container"
