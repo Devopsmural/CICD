@@ -8,7 +8,7 @@ launch_container()
   echo "INFO: Begin Docker container creation"
   IMG=$1
   BUILDDIR=$(pwd)
-  mkdir sanity
+  mkdir saniter
 
   CID=$(/usr/bin/docker run -itd --name cloudstack -p 8080:8080 -v ${BUILDDIR}/sanity:/opt/jboss/wildfly/standalone/log ${IMG})
 
